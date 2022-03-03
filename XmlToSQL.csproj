@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageId>Mysoft.XmlToSQL</PackageId>
+    <Authors>Cownxu</Authors>
+    <PackageIcon>image.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Admin\Desktop\image.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="C:\Users\Admin\Desktop\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ClownFish.Base">
+      <HintPath>..\Vs写的Demo\XML执行SQL\bin\Debug\net45\ClownFish.Base.dll</HintPath>
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+  </ItemGroup>
+
+</Project>
