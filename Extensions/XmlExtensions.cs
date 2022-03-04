@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Mysoft.Map6.Data.DAL;
-using Mysoft.Map6.Data.Xml;
+using XmlToSQL.Mysoft.DAL;
+using XmlToSQL.Mysoft.Xml;
 
 namespace XmlToSQL.Extensions
 {
