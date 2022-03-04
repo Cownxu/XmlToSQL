@@ -6,9 +6,9 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <PackageId>Mysoft.XmlToSQL</PackageId>
     <Authors>Cownxu</Authors>
-    <PackageIcon>image.png</PackageIcon>
+    <PackageIcon>IMG_1649.JPG</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageProjectUrl>https://github.com/Cownxu/XmlToSQL</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Cownxu/XmlToSQL</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="C:\Users\Admin\Desktop\image.png">
+    <None Include="C:\Users\Admin\Desktop\IMG_1649.JPG">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
