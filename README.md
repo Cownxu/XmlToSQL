@@ -13,4 +13,7 @@
 	</XmlCommand>
 </ArrayOfXmlCommand>
 ```
+## 试一下
+service.AddXmlProvider(dirPath,connectionString,"System.Data.SqlClient");
+
 > 后续会持续更新
