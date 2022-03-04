@@ -14,6 +14,13 @@
 </ArrayOfXmlCommand>
 ```
 ## 试一下
-service.AddXmlProvider(dirPath,connectionString,"System.Data.SqlClient");
+```
+service.AddXmlProvider(dirPath,connectionString,"System.Data.SqlClient");//先注入
 
+XmlCommand command = new XmlCommand("Lee_Test", new { MoId  = 1000000040 });//使用方法1
+var data = command.ToDataTable();
+
+var row = XmlCommand.From("Lee_Test", new { MoId = 1000000040 }).ToDataTable().Rows;//使用方法2
+
+```
 > 后续会持续更新。。。
