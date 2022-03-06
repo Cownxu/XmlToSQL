@@ -1,4 +1,4 @@
-# 这是一个可以在XML里面写SQL并执行的工具
+# 这是一个可以在XML里面写SQL并执行的工具，依赖包下载>>>>【CownxuFils.Base】
 > XML如下格式
 ```
 <?xml version="1.0" encoding="utf-8"?>
