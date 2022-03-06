@@ -7,8 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using ClownFish.Base.Reflection;
-using CownxuFils.Base.Reflection;
 using CownxuFish.Base.Reflection;
 
 namespace XmlToSQL.Mysoft.DAL
