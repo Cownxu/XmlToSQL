@@ -1,4 +1,4 @@
-# 这是一个可以在XML里面写SQL并执行的工具，如果您有更好的想法可以随时Issues
+# 这是一个可以在XML里面写SQL并执行的工具，如果您有更好的想法可以随时提建议，并联系我【Dear_Leexu@163.com】
 > XML如下格式
 ```
 <?xml version="1.0" encoding="utf-8"?>
