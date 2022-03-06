@@ -11,8 +11,13 @@ namespace XmlToSQL.Mysoft.DAL
 {
 	internal class ConnectionManager : IDisposable
 	{
-		private readonly Stack<TransactionStackItem> _transactionModes = new Stack<TransactionStackItem>();
+        private readonly TransactionStackItem _item;
+        private readonly Stack<TransactionStackItem> _transactionModes = new Stack<TransactionStackItem>();
 
+        public ConnectionManager(TransactionStackItem item)
+        {
+            _item = item;
+        }
 		internal ConnectionInfo OpenTopStackInfo(bool hit = false)
 		{
 			TransactionStackItem transactionStackItem = _transactionModes.Peek();
@@ -272,7 +277,7 @@ namespace XmlToSQL.Mysoft.DAL
 		{
 			if (_transactionModes.Count > 0)
 			{
-				return _transactionModes.Peek().Info;
+				return _item.Info;
 			}
 			return null;
 		}

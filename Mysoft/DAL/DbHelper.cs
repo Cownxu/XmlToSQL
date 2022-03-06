@@ -2,26 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using ClownFish.Base.Reflection;
+using CownxuFils.Base.Reflection;
+using CownxuFish.Base.Reflection;
 
 namespace XmlToSQL.Mysoft.DAL
 {
 	internal static class DbHelper
-	{
+    {
+        public static TransactionStackItem item = new TransactionStackItem();
 		internal static int ExecuteNonQuery(DbCommand command)
 		{
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(command, (DbCommand cmd) => cmd.ExecuteNonQuery());
 		}
 
 		internal static T ExecuteScalar<T>(DbCommand command)
 		{
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(command, (DbCommand cmd) => ConvertScalar<T>(cmd.ExecuteScalar()));
 		}
 
 		internal static List<T> ToScalarList<T>(DbCommand command)
 		{
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(command, delegate(DbCommand cmd)
 			{
@@ -37,6 +42,7 @@ namespace XmlToSQL.Mysoft.DAL
 
 		internal static T ConvertScalar<T>(object obj)
 		{
+            ConnectionScope._item = item;
 			if (obj == null || DBNull.Value.Equals(obj))
 			{
 				return default(T);
@@ -51,12 +57,14 @@ namespace XmlToSQL.Mysoft.DAL
 
 		internal static DbDataReader ExecuteReader(DbCommand command)
 		{
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(command, (DbCommand cmd) => cmd.ExecuteReader());
 		}
 
 		internal static DataSet ToDataSet(DbCommand command)
 		{
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(command, delegate(DbCommand cmd)
 			{
@@ -73,7 +81,8 @@ namespace XmlToSQL.Mysoft.DAL
 		}
 
 		internal static DataTable ToDataTable(DbCommand command)
-		{
+        {
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(command, delegate
 			{
@@ -87,6 +96,7 @@ namespace XmlToSQL.Mysoft.DAL
 
 		internal static List<T> ToList<T>(DbCommand cmd) where T : class
 		{
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(cmd, delegate(DbCommand p)
 			{
@@ -101,6 +111,7 @@ namespace XmlToSQL.Mysoft.DAL
 
 		private static List<T> ToListByIFillable<T>(DbDataReader reader) where T : class
 		{
+            ConnectionScope._item = item;
 			List<T> list = new List<T>();
 			while (reader.Read())
 			{
@@ -114,6 +125,7 @@ namespace XmlToSQL.Mysoft.DAL
 
 		private static List<T> ToListByReflect<T>(DbDataReader reader) where T : class
 		{
+            ConnectionScope._item = item;
 			TypeDescription typeDiscription = TypeDescriptionCache.GetTypeDiscription(typeof(T));
 			List<T> list = new List<T>();
 			string[] columnNames = GetColumnNames(reader);
@@ -127,6 +139,7 @@ namespace XmlToSQL.Mysoft.DAL
 
 		internal static T ToSingle<T>(DbCommand cmd) where T : class
 		{
+            ConnectionScope._item = item;
 			using ConnectionScope connectionScope = new ConnectionScope();
 			return connectionScope.Current.ExecuteCommand(cmd, delegate(DbCommand p)
 			{
@@ -141,6 +154,7 @@ namespace XmlToSQL.Mysoft.DAL
 
 		private static T ToSingleByIFillable<T>(DbDataReader reader) where T : class
 		{
+            ConnectionScope._item = item;
 			if (reader.Read())
 			{
 				T val = InstanceFactory.Create<T>();

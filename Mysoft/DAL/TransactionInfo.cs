@@ -4,7 +4,7 @@ using System.Data.Common;
 
 namespace XmlToSQL.Mysoft.DAL
 {
-	internal class TransactionInfo : IDisposable
+	public class TransactionInfo : IDisposable
 	{
 		internal DbTransaction Transaction { get; }
 

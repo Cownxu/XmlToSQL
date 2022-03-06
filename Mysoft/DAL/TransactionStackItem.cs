@@ -1,8 +1,9 @@
 namespace XmlToSQL.Mysoft.DAL
 {
-	internal class TransactionStackItem
+	public class TransactionStackItem
 	{
-		public ConnectionInfo Info { get; set; }
+
+        public ConnectionInfo Info { get; set; }
 
 		public TransactionMode Mode { get; set; }
 

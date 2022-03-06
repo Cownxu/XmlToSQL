@@ -14,6 +14,11 @@
 </ArrayOfXmlCommand>
 ```
 ## 试一下
+-----------------
+###  支持的参数数据类型 
+
+> 【String】、【Int32】、【Guid】
+
 ```
 service.AddXmlProvider(dirPath,connectionString,"System.Data.SqlClient");//先注入
 

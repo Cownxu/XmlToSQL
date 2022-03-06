@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlToSQL", "XmlToSQL.csproj", "{56F9E1DE-C177-44FE-8087-2F2EDFB6F2C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlToSQL", "XmlToSQL.csproj", "{56F9E1DE-C177-44FE-8087-2F2EDFB6F2C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CownxuFils.Base", "..\CownxuFils.Base\CownxuFils.Base.csproj", "{10030574-B744-4C0B-A52B-3B659EA931BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlToSQL.Test", "..\XmlToSQL.Test\XmlToSQL.Test.csproj", "{A88327EE-FE4B-4E82-9DF7-75069B68A704}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{56F9E1DE-C177-44FE-8087-2F2EDFB6F2C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56F9E1DE-C177-44FE-8087-2F2EDFB6F2C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56F9E1DE-C177-44FE-8087-2F2EDFB6F2C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10030574-B744-4C0B-A52B-3B659EA931BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10030574-B744-4C0B-A52B-3B659EA931BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10030574-B744-4C0B-A52B-3B659EA931BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10030574-B744-4C0B-A52B-3B659EA931BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A88327EE-FE4B-4E82-9DF7-75069B68A704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A88327EE-FE4B-4E82-9DF7-75069B68A704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A88327EE-FE4B-4E82-9DF7-75069B68A704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A88327EE-FE4B-4E82-9DF7-75069B68A704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

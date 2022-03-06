@@ -7,14 +7,17 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using ClownFish.Base.Reflection;
+using System.Threading.Tasks;
+using CownxuFils.Base.Reflection;
+using CownxuFish.Base.Reflection;
 using XmlToSQL.Mysoft.Xml;
 
 namespace XmlToSQL.Mysoft.DAL
 {
-	public sealed class XmlCommand : IDbExecute
+	public sealed class XmlCommand : IXmlCommand
 	{
-		public class PagingInfo
+
+        public class PagingInfo
 		{
 			public int PageIndex { get; set; }
 
@@ -32,50 +35,73 @@ namespace XmlToSQL.Mysoft.DAL
 			}
 		}
 
-		private CPQuery _query;
+        #region 成员变量
 
-		private int _paramIndex = 1;
+        private readonly CPQuery? _query;
 
-		private static readonly Regex s_pagingRegex = new Regex("\\)\\s*as\\s*rowindex\\s*,", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
+        private int _paramIndex = 1;
 
-		internal CPQuery Query => _query;
+        private static readonly Regex s_pagingRegex = new Regex("\\)\\s*as\\s*rowindex\\s*,", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
 
-		public DbCommand Command => _query.Command;
+        internal CPQuery Query => _query;
 
-		public XmlCommand(string name)
-			: this(name, null)
-		{
+        public DbCommand Command => _query!.Command;
+
+        #endregion
+
+		//public XmlCommand(string name)
+		//	: this(name, null)
+		//{
+		//}
+        public XmlCommand(TransactionStackItem item)
+        {
+            CPQuery.item = item;
+
 		}
-
 		public XmlCommand(string name, object argsObject)
 		{
-			if (string.IsNullOrEmpty(name))
-			{
-				throw new ArgumentNullException("name");
-			}
-			XmlCommandItem command = XmlCommandManager.GetCommand(name);
-			if (command == null)
-			{
-				throw new ArgumentOutOfRangeException("name", $"指定的XmlCommand名称 {name} 不存在。");
-			}
-			_query = BuildCPQuery(command, argsObject);
-			if (command.Timeout > _query.Command.CommandTimeout)
-			{
-				_query.Command.CommandTimeout = command.Timeout;
-			}
-			_query.Command.CommandType = command.CommandType;
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name");
+            }
+            XmlCommandItem command = XmlCommandManager.GetCommand(name);
+            if (command == null)
+            {
+                throw new ArgumentOutOfRangeException("name", $"指定的XmlCommand名称 {name} 不存在。");
+            }
+            _query = BuildCPQuery(command, argsObject);
+            if (command.Timeout > _query.Command.CommandTimeout)
+            {
+                _query.Command.CommandTimeout = command.Timeout;
+            }
+            _query.Command.CommandType = command.CommandType;
 		}
 
-		public static XmlCommand From(string name)
+  //      private void ExecFrom(string name, object argsObject)
+  //      {
+           
+		//}
+
+        public async Task<XmlCommand> From(string name)
 		{
-			return new XmlCommand(name);
+            Task<XmlCommand> command = Task.Run<XmlCommand>(() => { return new XmlCommand(name,null); });
+            return await command;
 		}
 
-		public static XmlCommand From(string name, object argsObject)
-		{
-			return new XmlCommand(name, argsObject);
+		public async Task<XmlCommand> From(string name, object argsObject)
+        {
+            Task<XmlCommand> command =  Task.Run<XmlCommand>(() => { return new XmlCommand(name, argsObject); });
+			return await command;
 		}
+        internal static XmlCommand FromPri(string name)
+        {
+            return new XmlCommand(name,null);
+        }
 
+        internal static XmlCommand FromPri(string name, object argsObject)
+        {
+            return new XmlCommand(name, argsObject);
+        }
 		private List<DbParameter> CloneParameters(XmlCommandItem command)
 		{
 			List<DbParameter> list = new List<DbParameter>(command.Parameters.Count);

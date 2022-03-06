@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using ClownFish.Base.Reflection;
+using CownxuFils.Base.Reflection;
+using CownxuFish.Base.Reflection;
 
 namespace XmlToSQL.Mysoft.DAL
 {
@@ -20,7 +22,7 @@ namespace XmlToSQL.Mysoft.DAL
 			EndWith,
 			Skip
 		}
-
+        public static TransactionStackItem item = new TransactionStackItem();
 		private static int s_index;
 
 		private StringBuilder _sb = new StringBuilder(512);
@@ -39,7 +41,8 @@ namespace XmlToSQL.Mysoft.DAL
 		internal CPQuery(string text)
 		{
 			AddSqlText(text);
-		}
+            DbHelper.item = item;
+        }
 
 		public static CPQuery Create()
 		{

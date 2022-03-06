@@ -1,31 +1,31 @@
+using CownxuFish.Base.Xml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Xml.Serialization;
-using ClownFish.Base.Xml;
 
 namespace XmlToSQL.Mysoft.Xml
 {
-	[Serializable]
-	[XmlType("XmlCommand")]
-	public class XmlCommandItem
-	{
-		[XmlAttribute("Name")]
-		public string CommandName;
+    [Serializable]
+    [XmlType("XmlCommand")]
+    public class XmlCommandItem
+    {
+        [XmlAttribute("Name")]
+        public string CommandName;
 
-		[XmlArrayItem("Parameter")]
-		public List<XmlCmdParameter> Parameters = new List<XmlCmdParameter>();
+        [XmlArrayItem("Parameter")]
+        public List<XmlCmdParameter> Parameters = new List<XmlCmdParameter>();
 
-		[XmlElement]
-		public XmlCdata CommandText;
+        [XmlElement]
+        public XmlCdata CommandText;
 
-		[DefaultValue(CommandType.Text)]
-		[XmlAttribute]
-		public CommandType CommandType = CommandType.Text;
+        [DefaultValue(CommandType.Text)]
+        [XmlAttribute]
+        public CommandType CommandType = CommandType.Text;
 
-		[DefaultValue(30)]
-		[XmlAttribute]
-		public int Timeout = 30;
-	}
+        [DefaultValue(30)]
+        [XmlAttribute]
+        public int Timeout = 30;
+    }
 }

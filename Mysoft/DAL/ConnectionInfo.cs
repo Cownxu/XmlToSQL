@@ -3,7 +3,7 @@ using System.Data.Common;
 
 namespace XmlToSQL.Mysoft.DAL
 {
-	internal class ConnectionInfo
+	public class ConnectionInfo
 	{
 		public string ConnectionString { get; set; }
 

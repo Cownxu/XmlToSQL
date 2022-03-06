@@ -62,7 +62,7 @@ namespace XmlToSQL.Mysoft.DAL
 				LockKey = oid,
 				LockType = type
 			};
-			LockInfo lockInfo = XmlCommand.From("MAP2:LockManager:GetLock", argsObject).ToSingle<LockInfo>();
+			LockInfo lockInfo = XmlCommand.FromPri("MAP2:LockManager:GetLock", argsObject).ToSingle<LockInfo>();
 			if (lockInfo != null)
 			{
 				if (!(lockInfo.LockUser == user) && !string.IsNullOrEmpty(user))
@@ -74,7 +74,7 @@ namespace XmlToSQL.Mysoft.DAL
 					LockKey = oid,
 					LockType = type
 				};
-				XmlCommand.From("MAP2:LockManager:DelLock", argsObject2).ExecuteNonQuery();
+				XmlCommand.FromPri("MAP2:LockManager:DelLock", argsObject2).ExecuteNonQuery();
 			}
 		}
 
@@ -96,7 +96,7 @@ namespace XmlToSQL.Mysoft.DAL
 			LockInfo lockInfo = null;
 			string providerName = ConnectionScope.ProviderName;
 			string connectionString = ConnectionScope.ConnectionString;
-			DateTime dateTime = XmlCommand.From("MAP2:LockManager:GetDbDateTime:" + providerName).ExecuteScalar<DateTime>();
+			DateTime dateTime = XmlCommand.FromPri("MAP2:LockManager:GetDbDateTime:" + providerName).ExecuteScalar<DateTime>();
 			DateTime expireTime = dateTime + expire;
 			using (new ConnectionScope(TransactionMode.Inherits, connectionString + " ", providerName))
 			{
@@ -112,7 +112,7 @@ namespace XmlToSQL.Mysoft.DAL
 				{
 					try
 					{
-						XmlCommand.From("MAP2:LockManager:AddLock:" + providerName, argsObject).ExecuteNonQuery();
+						XmlCommand.FromPri("MAP2:LockManager:AddLock:" + providerName, argsObject).ExecuteNonQuery();
 					}
 					catch (DbException)
 					{
@@ -138,7 +138,7 @@ namespace XmlToSQL.Mysoft.DAL
 							LockKey = oid,
 							LockType = type
 						};
-						XmlCommand.From("MAP2:LockManager:UpdateExpireTime", argsObject2).ExecuteNonQuery();
+						XmlCommand.FromPri("MAP2:LockManager:UpdateExpireTime", argsObject2).ExecuteNonQuery();
 					}
 					else
 					{
@@ -155,7 +155,7 @@ namespace XmlToSQL.Mysoft.DAL
 						LockKey = oid,
 						LockType = type
 					};
-					XmlCommand.From("MAP2:LockManager:UpdateLock", argsObject3).ExecuteNonQuery();
+					XmlCommand.FromPri("MAP2:LockManager:UpdateLock", argsObject3).ExecuteNonQuery();
 					lockInfo.Succeeded = true;
 					lockInfo.ExpireTime = expireTime;
 					lockInfo.LockUser = user;
@@ -172,7 +172,7 @@ namespace XmlToSQL.Mysoft.DAL
 				LockKey = oid,
 				LockType = type
 			};
-			return XmlCommand.From("MAP2:LockManager:GetLock", argsObject).ToSingle<LockInfo>();
+			return XmlCommand.FromPri("MAP2:LockManager:GetLock", argsObject).ToSingle<LockInfo>();
 		}
 
 		public static LockInfo GetLock(string oid, string type, string user)

@@ -5,12 +5,18 @@ namespace XmlToSQL.Mysoft.DAL
 {
 	public sealed class ConnectionScope : IDisposable
 	{
-		//Data Source=.;Initial Catalog=UFDATA_010_2020;Integrated Security=True
+        public static TransactionStackItem _item;
+
+        //Data Source=.;Initial Catalog=UFDATA_010_2020;Integrated Security=True
 		private static string s_connectionString = "";
 
-		private static string s_providerName= "";//System.Data.SqlClient
+        private static string s_providerName= "";//System.Data.SqlClient
 
-		[ThreadStatic]
+        public ConnectionScope(TransactionStackItem item)
+        {
+            _item = item;
+        }
+        [ThreadStatic]
 		private static ConnectionManager s_connection;
 
 		internal static string ProviderName
@@ -117,14 +123,18 @@ namespace XmlToSQL.Mysoft.DAL
 
 		private void Init(TransactionMode mode, string connectionString, string providerName)
 		{
-			string text = connectionString;
-			string text2 = providerName;
+			string text =s_connectionString;
+			string text2 =providerName;
 			if (s_connection == null)
 			{
-				s_connection = new ConnectionManager();
-			}
+				s_connection = new ConnectionManager(_item);
+                text = _item.Info.ConnectionString;
+                text2 = _item.Info.ProviderName;
+                mode = _item.Mode;
+            }
 			else
-			{
+            {
+                s_connection = new ConnectionManager(_item);
 				ConnectionInfo topStackInfo = s_connection.GetTopStackInfo();
 				if (topStackInfo != null)
 				{
