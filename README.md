@@ -20,12 +20,15 @@
 > 【String】、【Int32】、【Guid】
 
 ```
-service.AddXmlProvider(dirPath,connectionString,"System.Data.SqlClient");//先注入
+ services.AddXmlProvider(@"E:\Code\XmlToSQL\XmlToSQL.Test\", new TransactionStackItem
+            {
+                Info = new ConnectionInfo("Data Source=.;Initial Catalog=UFDATA_010_2020;Integrated Security=True", "System.Data.SqlClient"),
+                Mode = TransactionMode.Required
 
-XmlCommand command = new XmlCommand("Lee_Test", new { MoId  = 1000000040 });//使用方法1
-var data = command.ToDataTable();
+            });//先注入
 
-var row = XmlCommand.From("Lee_Test", new { MoId = 1000000040 }).ToDataTable().Rows;//使用方法2
+
+var row = XmlCommand.From("Lee_Test", new { MoId = 1000000040 }).ToDataTable().Rows;//使用方法
 
 ```
 > 后续会持续更新。。。
